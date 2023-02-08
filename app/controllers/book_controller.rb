@@ -16,7 +16,8 @@ class BookController < ApplicationController
       render json: cread,:include => [:author]
     end
     def create
-      c=Book.create(title: params[:title],category: params[:category],desc: params[:desc],created_date: params[:created_date],author_id: params[:author_id])
+      a=Author.find(params[:user_id])
+      c=a.books.create(title: params[:title],category: params[:category],desc: params[:desc],created_date: params[:created_date])
       render json:c
     end
     def update
